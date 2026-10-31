@@ -1,0 +1,71 @@
+{
+    "name": "codr/eventually-doctrine",
+    "description": "Doctrine adapter for codr/eventually: event store, snapshot store and view repositories on Doctrine ORM and Postgres.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["event-sourcing", "cqrs", "doctrine", "event-store", "snapshot"],
+    "authors": [
+        {
+            "name": "Guillaume Aveline",
+            "email": "917449+guillaume-a@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:guillaume-a/eventually.git"
+        }
+    ],
+    "require": {
+        "php": ">=8.5",
+        "codr/eventually": "@dev",
+        "doctrine/dbal": "^4.5",
+        "doctrine/orm": "^3.7.6",
+        "psr/clock": "^1.0",
+        "symfony/doctrine-bridge": "^8.1",
+        "symfony/uid": "^8.1"
+    },
+    "require-dev": {
+        "deptrac/deptrac": "^4.7.2",
+        "friendsofphp/php-cs-fixer": ">=3.95.27",
+        "phpstan/phpstan": ">=2.3.4",
+        "phpunit/phpunit": "^12.5.42",
+        "roave/backward-compatibility-check": "^8.0"
+    },
+    "conflict": {
+        "symfony/symfony": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Codr\\Eventually\\Doctrine\\": "src/"
+        },
+        "exclude-from-classmap": [
+            "/tests/"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Codr\\Eventually\\Doctrine\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "phpstan": "phpstan analyse",
+        "cs-check": "php-cs-fixer fix --dry-run --diff",
+        "cs-fix": "php-cs-fixer fix",
+        "deptrac": "deptrac analyse",
+        "test": "phpunit",
+        "bc-check": "roave-backward-compatibility-check",
+        "check": [
+            "@composer validate",
+            "@phpstan",
+            "@cs-fix",
+            "@deptrac",
+            "@test"
+        ]
+    }
+}

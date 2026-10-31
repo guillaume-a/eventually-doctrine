@@ -1,0 +1,32 @@
+deptrac:
+    paths:
+        - ./src
+    layers:
+        -
+            name: Adapter
+            collectors:
+                -
+                    type: classNameRegex
+                    value: '#^Codr\\Eventually\\Doctrine\\#'
+        -
+            name: Core
+            collectors:
+                -
+                    type: classNameRegex
+                    value: '#^Codr\\Eventually\\(Domain|Application)\\#'
+        -
+            name: Allowed
+            collectors:
+                -
+                    type: classNameRegex
+                    value: '#^(Doctrine\\(DBAL|ORM)|Psr\\Clock|Symfony\\Component\\Uid|Symfony\\Bridge\\Doctrine)\\#'
+        -
+            name: Forbidden
+            collectors:
+                -
+                    type: classNameRegex
+                    value: '#^(Doctrine|Psr|Symfony)\\(?!(DBAL|ORM|Clock)\\|Component\\Uid\\|Bridge\\Doctrine\\)#'
+    ruleset:
+        Adapter:
+            - Core
+            - Allowed
